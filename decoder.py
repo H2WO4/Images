@@ -1,5 +1,5 @@
-from PIL import Image
 import sys
+from PIL import Image
 # https://qoiformat.org/qoi-specification.pdf
 
 # Define a type shortcut
@@ -33,7 +33,7 @@ with open(sys.argv[1], 'rb') as img:
 		data = img.read(1)
 		match data:
 			# QOI_OP_RGB
-			case b'\xfe':
+			case b'\xFE':
 				# Read the 3 next bytes as RGB
 				red = int.from_bytes(img.read(1), 'big', signed=False)
 				grn = int.from_bytes(img.read(1), 'big', signed=False)
@@ -45,7 +45,7 @@ with open(sys.argv[1], 'rb') as img:
 				pixels.extend(px)
 
 			# QOI_OP_RGBA
-			case b'\xff':
+			case b'\xFF':
 				# Read the 3 next bytes as RGBA
 				red = int.from_bytes(img.read(1), 'big', signed=False)
 				grn = int.from_bytes(img.read(1), 'big', signed=False)
