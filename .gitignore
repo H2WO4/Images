@@ -1,0 +1,4 @@
+.vscode/
+
+**/out*.png
+**/out*.qoi
