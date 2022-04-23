@@ -26,7 +26,7 @@ with Image.open(sys.argv[1]).convert('RGBA') as img:
 					and (pixels[-2] & 0b11000000) != 0x80 \
 					and pixels[-4] != 0xFE \
 					and pixels[-5] != 0xFF:
-						pixels[-1] = (prev ^ 0x01) + ((prev & 0x01) << 1)
+						pixels[-1] += 1
 					else:
 						pixels.append(0xC0)
 				
@@ -62,7 +62,7 @@ with Image.open(sys.argv[1]).convert('RGBA') as img:
 		# Set the last read pixel as this one
 		last = px
 	
-	with open("out.qoi", 'wb') as f:
+	with open("QOI/out.qoi", 'wb') as f:
 		f.write(b'qoif')
 		f.write(img.height.to_bytes(4, 'big'))
 		f.write(img.width.to_bytes(4, 'big'))

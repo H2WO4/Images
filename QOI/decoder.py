@@ -1,6 +1,5 @@
 import sys
 from PIL import Image
-# https://qoiformat.org/qoi-specification.pdf
 
 # Define a type shortcut
 pixel = tuple[int, int, int, int]
@@ -46,7 +45,7 @@ with open(sys.argv[1], 'rb') as img:
 
 			# QOI_OP_RGBA
 			case b'\xFF':
-				# Read the 3 next bytes as RGBA
+				# Read the 4 next bytes as RGBA
 				red = int.from_bytes(img.read(1), 'big', signed=False)
 				grn = int.from_bytes(img.read(1), 'big', signed=False)
 				blu = int.from_bytes(img.read(1), 'big', signed=False)
@@ -132,4 +131,4 @@ with open(sys.argv[1], 'rb') as img:
 	if img.read() != b'\x00\x00\x00\x00\x00\x00\x00\x01': raise Exception("Invalid file ending")
 
 	# Save the decoded image as PNG
-	Image.frombytes('RGBA', (width, height), bytes(pixels)).save('out.png') # type: ignore
+	Image.frombytes('RGBA', (width, height), bytes(pixels)).save('QOI/out.png') # type: ignore
